@@ -3,6 +3,7 @@ package szakdolgozat.apigateway.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,6 +38,7 @@ import szakdolgozat.apigateway.utils.URLRequestTransformer;
 
 @RestController
 @Slf4j
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class GatewayController {
 
     @Autowired
@@ -54,7 +56,7 @@ public class GatewayController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/api/**", method = { GET, POST, DELETE })
+    @RequestMapping(value = "/api/**", method = { GET, POST, DELETE, PUT })
     @ResponseBody
     public ResponseEntity<String> proxyRequest(HttpServletRequest request) throws IOException, URISyntaxException, NoSuchMethodException {
         HttpUriRequest proxiedRequest = createHttpUriRequest(request);
