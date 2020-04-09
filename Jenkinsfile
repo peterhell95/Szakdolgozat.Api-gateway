@@ -37,5 +37,11 @@ pipeline {
                 sh 'docker push peterhell95/apigateway:jenkins' 
             }
         }
+        
+        stage ('Run Deployment') {
+            steps {
+                sh 'kubectl apply -f apigateway-deployment.yaml' 
+            }
+        }
     }
 }
