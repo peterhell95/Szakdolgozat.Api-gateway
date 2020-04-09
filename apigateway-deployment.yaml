@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway
+  labels:
+    app: apigateway
+spec:
+  selector:
+    matchLabels:
+      app: apigateway
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+        - image: peterhell95/apigateway:jenkins
+          imagePullPolicy: Always
+          name: apigateway
+          ports:
+            - containerPort: 8084
