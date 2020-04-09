@@ -38,10 +38,10 @@ pipeline {
             }
         }
         
-         stage('Apply Kubernetes files') {
-    		withKubeConfig([credentialsId: 'user1', serverUrl: 'https://api.k8s.my-company.com']) {
-      			sh 'kubectl apply -f my-kubernetes-directory'
-    		}
-  		}
+        stage ('Run Deployment') {
+            steps {
+                sh 'kubectl apply -f apigateway-deployment.yaml' 
+            }
+        }
     }
 }
