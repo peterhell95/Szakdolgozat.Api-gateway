@@ -37,5 +37,13 @@ pipeline {
                 bat 'docker push peterhell95/apigateway:jenkins' 
             }
         }
+        
+        stage('Apply Kubernetes files') {
+        	steps{
+        	withKubeConfig([credentialsId: 'my_kubernetes2',  serverUrl: 'https://192.168.41.137:8443']) {
+      			bat 'kubectl apply -f apigateway-deployment.yaml'
+   				}
+  			}
+        }
     }
 }
